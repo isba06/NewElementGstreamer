@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.23)
+project(NewElementGstreamer)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_FLAGS "-g")
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+#[[ set(PKG_CONFIG_PATH /Library/Frameworks/GStreamer.framework/Versions/1.0/lib/pkgconfig)
+set(PKG_CONFIG_USE_CMAKE_PREFIX_PATH 1)
+set(CMAKE_PREFIX_PATH /usr/local/Cellar/)
+]]
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules/")
+#set(PKG_CONFIG_PATH "/Library/Frameworks/GStreamer.framework/Versions/1.0/lib/pkgconfig")
+
+find_package(GStreamer REQUIRED)
+#find_package(GStreamer REQUIRED)
+if(GSTREAMER_FOUND)
+    message(STATUS "gstreamer found...")
+    include_directories(${GSTREAMER_INCLUDE_DIRS})
+endif()
+add_executable(NewElementGstreamer src/main.cpp)
+target_link_libraries(${PROJECT_NAME} ${GSTREAMER_LIBRARIES})
